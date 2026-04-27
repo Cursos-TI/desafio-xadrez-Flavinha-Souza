@@ -1,57 +1,88 @@
 #include <stdio.h>
 
+// =========================
+// TORRE (recursivo)
+// Move para a direita
+// =========================
+void moverTorre(int casas) {
+    if (casas <= 0) return;
+
+    printf("Direita\n");
+    moverTorre(casas - 1);
+}
+
+// =========================
+// RAINHA (recursivo)
+// Move para a esquerda
+// =========================
+void moverRainha(int casas) {
+    if (casas <= 0) return;
+
+    printf("Esquerda\n");
+    moverRainha(casas - 1);
+}
+
+// =========================
+// BISPO (recursivo + loops aninhados)
+// Diagonal: cima + direita
+// =========================
+void moverBispo(int casas) {
+    if (casas <= 0) return;
+
+    // Loop externo (vertical)
+    for (int i = 0; i < 1; i++) {
+        printf("Cima ");
+
+        // Loop interno (horizontal)
+        for (int j = 0; j < 1; j++) {
+            printf("Direita\n");
+        }
+    }
+
+    moverBispo(casas - 1);
+}
+
 int main() {
 
     // =========================
-    // TORRE (usando FOR)
-    // Move 5 casas para a direita
+    // TORRE
     // =========================
     printf("Movimento da Torre:\n");
-
-    for (int i = 0; i < 5; i++) {
-        printf("Direita\n");
-    }
+    moverTorre(5);
 
     // =========================
-    // BISPO (usando WHILE)
-    // Move 5 casas na diagonal (cima + direita)
+    // BISPO
     // =========================
     printf("\nMovimento do Bispo:\n");
-
-    int j = 0;
-    while (j < 5) {
-        printf("Cima Direita\n");
-        j++;
-    }
+    moverBispo(5);
 
     // =========================
-    // RAINHA (usando DO-WHILE)
-    // Move 8 casas para a esquerda
+    // RAINHA
     // =========================
     printf("\nMovimento da Rainha:\n");
-
-    int k = 0;
-    do {
-        printf("Esquerda\n");
-        k++;
-    } while (k < 8);
+    moverRainha(8);
 
     // =========================
-    // CAVALO (loops aninhados)
-    // Move em "L": 2 para baixo + 1 para a esquerda
+    // CAVALO (loops complexos)
+    // Movimento: 2 para cima + 1 para direita
     // =========================
     printf("\nMovimento do Cavalo:\n");
 
-    for (int i = 0; i < 2; i++) {
-        printf("Baixo\n");
+    for (int i = 0; i < 3; i++) {
 
-        // Após o segundo movimento para baixo,
-        // executa o movimento lateral
-        if (i == 1) {
-            int l = 0;
-            while (l < 1) {
-                printf("Esquerda\n");
-                l++;
+        // Primeiros dois movimentos: Cima
+        if (i < 2) {
+            printf("Cima\n");
+            continue; // volta pro loop
+        }
+
+        // Último movimento: Direita
+        if (i == 2) {
+            int j = 0;
+
+            while (j < 1) {
+                printf("Direita\n");
+                break; // sai do loop interno
             }
         }
     }
